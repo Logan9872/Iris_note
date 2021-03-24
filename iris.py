@@ -41,17 +41,23 @@ iris_dataframe = pd.DataFrame(X_train,columns=iris_dataset.feature_names)
 grr = pd.plotting.scatter_matrix(
     iris_dataframe, c=y_train, figsize=(15, 15), marker='o',
     hist_kwds={'bins': 20}, s=60, alpha=.8, cmap=mglearn.cm3);
-plt.show()
+# plt.show()
 
 
 # k临近算法
 knn = KNeighborsClassifier(n_neighbors=1);
 knn.fit(X_train, y_train);
 
+
 #3.做出预测
-X_new = np.array([[5, 2.9, 1, 0.2]]);
+X_new = np.array([[5, 2.9, 1, 2.2]]);
+# X_new = np.array([[2.2, 2.2, 3.2, 0.2]]);
+# X_new = np.array([[8,0.4,2,5.5]]);
+
+
 print("3.1X_new的格式:{}".format(X_new.shape));
 #调用knn对象的predict方法进行预测
+
 prediction = knn.predict(X_new);
 print("3.2Prediction:{}".format(prediction));
 print("3.3预测目标姓名:{}".format(
@@ -59,10 +65,10 @@ print("3.3预测目标姓名:{}".format(
 ));
 print("------------------------------------------------------------------------------------------------------------------------------")
 
-#评估模型
+#4.评估模型
 y_pred = knn.predict(X_test);
 print("4.1测试集预测结果:\n{}".format(y_pred));
-print("4.2测试集得分:{:.2f}".format(np.mean(y_pred == y_test)));
-print("4.3测试集得分:{:.2f}".format(knn.score(X_test,y_test)));
+print("4.2测试集得分:{:.10f}".format(np.mean(y_pred == y_test)));
+print("4.3测试集得分:{:.10f}".format(knn.score(X_test,y_test)));
 print("------------------------------------------------------------------------------------------------------------------------------")
 
